@@ -12,6 +12,7 @@
     <modules>
         <module>demo-socket-springboot</module>
         <module>demo-fileIo</module>
+        <module>demo-netty-websocket</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
