@@ -1,4 +1,4 @@
-package org.zfx.client.controller;
+package org.zfx.controller;
 
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.json.JSONObject;

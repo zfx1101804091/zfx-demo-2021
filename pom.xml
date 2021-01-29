@@ -13,6 +13,7 @@
         <module>demo-socket-springboot</module>
         <module>demo-fileIo</module>
         <module>demo-netty-websocket</module>
+        <module>demo-netty-client</module>
         <module>demo-netty-sycclient</module>
     </modules>
 
