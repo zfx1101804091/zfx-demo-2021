@@ -24,7 +24,6 @@ public class WebSocketCallable implements Callable {
     }
 
     public WebSocketCallable(Channel channel, String content){
-        createSession(channel);
         this.channel = channel;
         this.content = content;
     }
@@ -45,12 +44,5 @@ public class WebSocketCallable implements Callable {
         return null;
     }
 
-    public static void createSession(Channel channel) {
-        JSONObject message = JSONUtil.createObj();
-        message.putOpt("venus", "create");
-        message.putOpt("transaction", "createSession-" + RandomUtil.randomString(12));
-        System.out.println("===========");
-        channel.writeAndFlush(message);
-    }
 
 }
