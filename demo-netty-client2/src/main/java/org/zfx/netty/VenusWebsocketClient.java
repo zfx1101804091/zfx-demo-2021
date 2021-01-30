@@ -1,4 +1,4 @@
-package org.zfx.netty.client;
+package org.zfx.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -13,25 +13,17 @@ import io.netty.handler.codec.http.websocketx.WebSocketClientHandshakerFactory;
 import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import org.zfx.netty.core.DefaultChannelFuture;
+import io.netty.util.AttributeKey;
 
 import java.net.URI;
 
 public class VenusWebsocketClient {
 
-    private String url;
-
-    public VenusWebsocketClient(String url) {
-        this.url = url;
-    }
-
     private static EventLoopGroup group;
     private static Bootstrap bootstrap;
     private static WebSocketClientHandshaker handshaker;
-    private DefaultChannelFuture dcf;
 
-
-    public static void start(String url,String request) {
+    public static String start(String url,String request) {
         try {
             URI uri = URI.create(url);
             group = new NioEventLoopGroup();
@@ -60,11 +52,13 @@ public class VenusWebsocketClient {
                     });
             ChannelFuture future = bootstrap.connect(uri.getHost(), uri.getPort()).sync();
             future.channel().closeFuture().sync();
+            return future.channel().attr(AttributeKey.valueOf("res")).get().toString();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             group.shutdownGracefully();
         }
+        return null;
     }
 
 }
