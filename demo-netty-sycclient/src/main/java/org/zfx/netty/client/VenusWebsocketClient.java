@@ -1,5 +1,7 @@
 package org.zfx.netty.client;
 
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -14,24 +16,19 @@ import io.netty.handler.codec.http.websocketx.WebSocketVersion;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import org.zfx.netty.core.DefaultChannelFuture;
+import org.zfx.netty.model.VenusRequest;
+import org.zfx.netty.model.VenusResponse;
 
 import java.net.URI;
 
 public class VenusWebsocketClient {
 
-    private String url;
-
-    public VenusWebsocketClient(String url) {
-        this.url = url;
-    }
-
     private static EventLoopGroup group;
     private static Bootstrap bootstrap;
     private static WebSocketClientHandshaker handshaker;
-    private DefaultChannelFuture dcf;
 
 
-    public static void start(String url,String request) {
+    public static JSONObject start(String url, VenusRequest request) {
         try {
             URI uri = URI.create(url);
             group = new NioEventLoopGroup();
@@ -59,12 +56,17 @@ public class VenusWebsocketClient {
                         }
                     });
             ChannelFuture future = bootstrap.connect(uri.getHost(), uri.getPort()).sync();
-            future.channel().closeFuture().sync();
+//            future.channel().closeFuture().sync();
+
+            DefaultChannelFuture dcf= new DefaultChannelFuture(request);
+            VenusResponse response = dcf.get();
+            return JSONUtil.parseObj(response);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             group.shutdownGracefully();
         }
+        return null;
     }
 
 }
