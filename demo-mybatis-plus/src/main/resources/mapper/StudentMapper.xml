@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zfx.mp.mapper.StudentMapper">
+
+    <resultMap id="studentTeacher" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="tid" javaType="Teacher"
+                     select="queryTeacher" />
+    </resultMap>
+
+    <select id="queryById" resultType="Student">
+        select * from student limit 1,1;
+    </select>
+
+    <select id="queryMore" resultMap="studentTeacher">
+        select * from student
+    </select>
+
+    <select id="queryTeacher" resultType="Teacher">
+        select * from teacher where id = #{id};
+    </select>
+</mapper>
