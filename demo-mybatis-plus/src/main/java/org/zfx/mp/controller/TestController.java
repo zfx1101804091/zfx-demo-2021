@@ -1,16 +1,13 @@
 package org.zfx.mp.controller;
 
-import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.RandomUtil;
-import cn.hutool.db.sql.Condition;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zfx.mp.pojo.Person1;
 import org.zfx.mp.pojo.Student;
-import org.zfx.mp.pojo.Teacher;
 import org.zfx.mp.service.StudentService;
 
 import java.util.List;
@@ -22,23 +19,24 @@ public class TestController {
     private StudentService studentService;
 
     @GetMapping("ts")
-    public String test1(){
-       Student student = studentService.queryById();
-       return JSONUtil.parseObj(student).toString();
+    public String test1() {
+        Student student = studentService.queryById();
+        return JSONUtil.parseObj(student).toString();
     }
 
     @GetMapping("ts2")
-    public String test2(){
+    public String test2() {
         List<Student> student = studentService.queryAll();
         return JSONUtil.parseObj(student).toString();
     }
 
     /**
      * 一对多
+     *
      * @return
      */
     @GetMapping("ts3")
-    public String test3(){
+    public String test3() {
         List<Student> student = studentService.queryMore();
         student.forEach(student1 -> {
             System.out.println(student1);
@@ -48,13 +46,27 @@ public class TestController {
     }
 
     @GetMapping("ts4")
-    public void insert(){
+    public void insert() {
         Student student = new Student();
-        student.setId(0);
-        student.setName("测试王33");
+        student.setName("测试王"+RandomUtil.randomString(12));
+//        QueryWrapper<Student> wrapper = new QueryWrapper<>();
+//        wrapper.eq("id", 5);
+//        studentService.update(student, wrapper);
+        studentService.save(student);
+    }
+    @GetMapping("ts6")
+    public void update() {
         QueryWrapper<Student> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",0);
-        studentService.update(student, wrapper);
+        wrapper.eq("id", 1364228172695216130L);
+        Student student = studentService.getOne(wrapper);
+        student.setName("hahaha");
+        studentService.updateById(student);
+    }
+    @GetMapping("ts5")
+    public void test5() {
+
+        Person1 person1 = new Person1();
+
     }
 
     public static void main(String[] args) {

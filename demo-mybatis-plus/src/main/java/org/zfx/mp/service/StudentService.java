@@ -1,11 +1,11 @@
 package org.zfx.mp.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
+import org.zfx.mp.base.BaseService;
 import org.zfx.mp.pojo.Student;
 
 import java.util.List;
 
-public interface StudentService extends IService<Student> {
+public interface StudentService extends BaseService<Student> {
 
     Student queryById();
 

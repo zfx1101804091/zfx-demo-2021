@@ -8,6 +8,9 @@
     <resultMap id="studentTeacher" type="Student">
         <result property="id" column="id"/>
         <result property="name" column="name"/>
+        <!-- association 对象
+             collection  集合
+         -->
         <association property="teacher" column="tid" javaType="Teacher"
                      select="queryTeacher" />
     </resultMap>
