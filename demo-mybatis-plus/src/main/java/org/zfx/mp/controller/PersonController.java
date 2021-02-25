@@ -7,6 +7,7 @@ import org.zfx.mp.service.PersonService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -50,5 +51,17 @@ public class PersonController {
         return String.valueOf(flag);
     }
 
+    @GetMapping("/update/{id}")
+    public void update(@PathVariable("id") Long id){
+        Person person = new Person();
+        person.setId(id);
+        person.setName("小王八");
+        personService.updateById(person);
+    }
+
+    @GetMapping("/del/{id}")
+    public void del(@PathVariable("id") Long id){
+        personService.deleteLogic(Arrays.asList(id));
+    }
 
 }
