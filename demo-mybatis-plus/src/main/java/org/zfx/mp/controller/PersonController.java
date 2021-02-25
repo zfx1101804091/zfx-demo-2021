@@ -31,7 +31,7 @@ public class PersonController {
      * @param id 主键
      * @return 单条数据
      */
-    @GetMapping("selectOne")
+    @GetMapping("info")
     public Person selectOne(Long id) {
         return this.personService.queryById(id);
     }
@@ -40,26 +40,19 @@ public class PersonController {
      * 插入
      * @return
      */
-    @GetMapping("insert")
-    public String insert(){
-        Person person = new Person();
-        person.setName("张三-"+ RandomUtil.randomNumbers(12));
-        person.setSex("男");
-        person.setAge(23);
-        person.setAddress("北京");
+    @PostMapping("insert")
+    public String insert(@RequestBody Person person){
         boolean flag = personService.save(person);
         return String.valueOf(flag);
     }
 
-    @GetMapping("/update/{id}")
-    public void update(@PathVariable("id") Long id){
-        Person person = new Person();
+    @PutMapping("/update/{id}")
+    public void update(@RequestBody Person person,@PathVariable Long id){
         person.setId(id);
-        person.setName("小王八");
         personService.updateById(person);
     }
 
-    @GetMapping("/del/{id}")
+    @DeleteMapping("/del/{id}")
     public void del(@PathVariable("id") Long id){
         personService.deleteLogic(Arrays.asList(id));
     }
