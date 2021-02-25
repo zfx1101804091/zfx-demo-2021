@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zfx.mp.base.BaseServiceImpl;
 import org.zfx.mp.mapper.StudentMapper;
-import org.zfx.mp.pojo.Student;
+import org.zfx.mp.entity.Student;
 import org.zfx.mp.service.StudentService;
 
 import javax.annotation.Resource;

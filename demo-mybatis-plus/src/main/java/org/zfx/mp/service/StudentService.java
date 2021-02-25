@@ -1,7 +1,7 @@
 package org.zfx.mp.service;
 
 import org.zfx.mp.base.BaseService;
-import org.zfx.mp.pojo.Student;
+import org.zfx.mp.entity.Student;
 
 import java.util.List;
 

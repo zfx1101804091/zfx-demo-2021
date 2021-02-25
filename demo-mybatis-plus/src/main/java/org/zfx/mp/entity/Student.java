@@ -1,12 +1,17 @@
-package org.zfx.mp.pojo;
+package org.zfx.mp.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.zfx.mp.base.BaseEntity;
 
-@TableName("teacher")
+@TableName("student")
 @Data
-public class Teacher extends BaseEntity {
+public class Student extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
+
     private String name;
+    private Teacher teacher;
+
+//    private List<Teacher> teacher;
 }

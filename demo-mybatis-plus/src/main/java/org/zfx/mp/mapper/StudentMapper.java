@@ -1,7 +1,7 @@
 package org.zfx.mp.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.zfx.mp.pojo.Student;
+import org.zfx.mp.entity.Student;
 
 import java.util.List;
 
