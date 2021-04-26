@@ -17,6 +17,7 @@
         <module>demo-netty-sycclient</module>
         <module>demo-netty-client2</module>
         <module>demo-mybatis-plus</module>
+        <module>demo-springboot-rabitmq</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
